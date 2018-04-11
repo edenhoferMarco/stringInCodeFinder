@@ -1,5 +1,6 @@
 package stringInCodeFinder;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Pattern;
 
@@ -8,7 +9,11 @@ public final class RegexParser {
 	public static Pattern toRegex(SearchType sType) {
 		String returnType = sType.returnType;
 		String name = sType.name;
-		List<StringBuffer> params = sType.params;
+		List<StringBuffer> params = new ArrayList<StringBuffer>();
+		
+		for (StringBuffer b : sType.params) {
+			params.add(new StringBuffer(b.toString()));
+		}
 		
 		StringBuffer pattern = new StringBuffer();
 		pattern.append(returnType);
@@ -16,7 +21,7 @@ public final class RegexParser {
 		pattern.append(name);
 		pattern.append("[ ]*\\([ ]*");
 		
-		if (!params.isEmpty()) {
+		if (params != null && !params.isEmpty()) {
 			for (StringBuffer p : params) {
 				int delimiter = p.indexOf(" ");
 				p.replace(delimiter, delimiter +1, "#");	/* replace the whitespace separating returnType and parameter name with # for later retrieval */

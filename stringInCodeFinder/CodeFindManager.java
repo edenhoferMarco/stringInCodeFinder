@@ -31,7 +31,7 @@ public class CodeFindManager {
 		String found;
 		initTestWorkingList();
 		for (SearchType sType : workingList) {
-			sType.setSearchPattern(RegexParser.toRegex(sType));
+			//sType.setSearchPattern(RegexParser.toRegex(sType));
 			System.out.println(sType.searchPattern);
 			if ((found = codeScanner.findWithinHorizon(sType.searchPattern, 0)) != null) {
 				this.foundString(found);
